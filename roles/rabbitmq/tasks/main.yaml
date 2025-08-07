@@ -1,0 +1,24 @@
+- import_tasks: configure-apt.yaml
+  tags:
+    - rabbitmq
+    - rabbitmq-configure-apt
+
+- import_tasks: edit-files.yaml
+  tags:
+    - rabbitmq
+    - rabbitmq-edit-files
+
+- import_tasks: reload-rabbitmq-service.yaml
+  tags:
+    - rabbitmq
+    - rabbitmq-reload-services
+
+- import_tasks: configure-rabbitmq-cluster.yaml
+  tags:
+    - rabbitmq
+    - rabbitmq-configure-cluster
+
+- import_tasks: setup-management.yaml
+  tags:
+    - rabbitmq
+    - rabbit-setup-management

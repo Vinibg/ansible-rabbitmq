@@ -1,0 +1,26 @@
+- name: Replace hosts file
+  ansible.builtin.blockinfile:
+    path: /etc/hosts
+    block: |
+      {{ hostvars['node1'] }}   node1
+      {{ hostvars['node2'] }}   node2
+      {{ hostvars['node3'] }}   node3
+    marker: "# ANSIBLE RABBITMQ HOSTS"
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Caputring Erlang Cookie
+  command: cat /var/lib/rabbitmq/.erlang.cookie
+  register: rabbitmq_erlang_cookie
+  when: inventory_hostname == "node1"
+
+- name: Setting Erlang Cookie of Node2 and Node3
+  template:
+    src: .erlang.cookie.j2
+    dest: /var/lib/rabbitmq/.erlang.cookie
+    owner: rabbitmq
+    group: rabbitmq
+    mode: "0400"
+    backup: yes
+  when: inventory_hostname != "node1"

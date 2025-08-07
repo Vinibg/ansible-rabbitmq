@@ -1,0 +1,17 @@
+- name: Enable RabbitMQ management plugin
+  command: rabbitmq-plugins enable rabbitmq_management
+
+- name: Enable RabbitMQ prometheus plugin
+  command: rabbitmq-plugins enable rabbitmq_prometheus
+
+- name: Add user to RabbitMQ
+  command: rabbitmqctl add_user {{ rabbitmq.username }} {{ rabbitmq.password }}
+  when: inventory_hostname == 'node1'
+
+- name: Set permissions for RabbitMQ user
+  command: rabbitmqctl set_permissions -p / {{ rabbitmq.username }} ".*" ".*" ".*"
+  when: inventory_hostname == 'node1'
+
+- name: Assign administrator tag to RabbitMQ user
+  command: rabbitmqctl set_user_tags {{ rabbitmq.username }} administrator
+  when: inventory_hostname == 'node1'

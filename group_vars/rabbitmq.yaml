@@ -1,0 +1,6 @@
+rabbitmq:
+  username: <rabbit user>
+  password: <rabbit password>
+  node1: <node1>
+  node2: <node2>
+  node3: <node3>

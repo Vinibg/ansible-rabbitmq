@@ -1,0 +1,18 @@
+- name: Setup RabbitMQ
+  hosts: rabbitmq
+  become: yes
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  
+  pre_tasks:
+    - set_fact:
+        hostnames: []
+      tags: always
+
+    - set_fact:
+        hostnames: "{{ hostnames + [ hostvars[item]['ansible_hostname'] ] }}"
+      with_items: "{{ vars['play_hosts'] }}"
+      tags: always
+  
+  roles:
+    - role: rabbitmq

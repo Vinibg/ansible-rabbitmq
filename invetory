@@ -1,0 +1,4 @@
+[rabbitmq]
+node1 ansible_host=<host> ansible_user=<user> ansible_password=<password> ansible_port=<port> ansible_sudo_pass=<sudo password>
+node2 ansible_host=<host> ansible_user=<user> ansible_password=<password> ansible_port=<port> ansible_sudo_pass=<sudo password>
+node3 ansible_host=<host> ansible_user=<user> ansible_password=<password> ansible_port=<port> ansible_sudo_pass=<sudo password>
